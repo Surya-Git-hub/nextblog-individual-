@@ -12,7 +12,9 @@ const page:NextPage = () => {
   const [data, setData] = useState<OutputData>();
 
   return (
+    <div className="container max-w-4xl">
     <EditorBlock data={data} onChange={setData} holder="editorjs-container" />
+    </div>
   );
 };
 
