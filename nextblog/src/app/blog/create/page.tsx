@@ -16,7 +16,7 @@ const page: NextPage = () => {
     <div className="grid grid-cols-2 gap-2">
       <div className="col-span-1 ">
         <h1>Editor</h1>
-        <div className="border rounded-md">
+        <div className="border rounded-md bg-white">
           <EditorBlock
             data={data}
             onChange={setData}
