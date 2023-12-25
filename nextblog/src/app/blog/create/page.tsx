@@ -1,35 +1,11 @@
-"use client";
-import { OutputData } from "@editorjs/editorjs";
-import type { NextPage } from "next";
-import dynamic from "next/dynamic";
-import { useState } from "react";
-import EditorJsRenderer from "@/components/EditorJsRenderer";
+import { Editor } from "novel";
+import React from "react";
 
-const EditorBlock = dynamic(() => import("@/components/Editor"), {
-  ssr: false,
-});
-
-const page: NextPage = () => {
-  const [data, setData] = useState<OutputData>();
-
+const page = () => {
   return (
-    <div className="grid grid-cols-2 gap-2">
-      <div className="col-span-1 ">
-        <h1>Editor</h1>
-        <div className="border rounded-md bg-white">
-          <EditorBlock
-            data={data}
-            onChange={setData}
-            holder="editorjs-container"
-          />
-        </div>
-      </div>
-      <div className="col-span-1 ">
-        <h1>Preview</h1>
-        <div className="border rounded-md">
-          <div className="p-16">{data && <EditorJsRenderer data={data} />}</div>
-        </div>
-      </div>
+    <div className=" flex min-h-screen flex-col items-center justify-between p-24">
+      <Editor 
+      />
     </div>
   );
 };
