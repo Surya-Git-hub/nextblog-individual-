@@ -1,6 +1,20 @@
+"use client";
+
+import useTheme from "@/context/theme";
 import React from "react";
 
 const Navbar = () => {
+  const { themeMode, darkTheme, lightTheme } = useTheme();
+  const toggleTheme = (e: any) => {
+    const themeStatus = e.currentTarget?.checked;
+    if (themeStatus) {
+      console.log("light");
+      lightTheme();
+    } else {
+      console.log("dark");
+      darkTheme();
+    }
+  };
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -20,6 +34,8 @@ const Navbar = () => {
             type="checkbox"
             className="theme-controller"
             value="synthwave"
+            checked={themeMode === "light"}
+            onChange={toggleTheme}
           />
 
           {/* sun icon */}
