@@ -16,22 +16,32 @@ export const ThemeContext = createContext<ThemeType>({
 // export const ThemeProvider = ThemeContext.Provider;
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [themeMode, setThemeMode] = useState("light");
+  let storedTheme;
+  if (typeof window !== "undefined" && window.localStorage) {
+    storedTheme = localStorage.getItem("BlogTheme");
+  }
+  const [themeMode, setThemeMode] = useState(
+    storedTheme ? storedTheme : "light"
+  );
+
+  console.log("theme",themeMode)
 
   const darkTheme = () => {
     setThemeMode("dark");
+    localStorage.setItem("BlogTheme", "dark");
   };
 
   const lightTheme = () => {
     setThemeMode("light");
+    localStorage.setItem("BlogTheme", "light");
   };
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", themeMode);
-    document
-      .querySelector("html")
-      ?.classList.remove("dark-theme", "light-theme");
-    document.querySelector("html")?.classList.add(themeMode + "-theme");
+    // document
+    //   .querySelector("html")
+    //   ?.classList.remove("dark-theme", "light-theme");
+    // document.querySelector("html")?.classList.add(themeMode + "-theme");
   }, [themeMode]);
 
   return (
