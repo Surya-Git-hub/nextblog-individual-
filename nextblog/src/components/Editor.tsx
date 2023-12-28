@@ -1,4 +1,4 @@
-"use client"; // this registers <Editor> as a Client Component
+"use client";
 import {
   BlockNoteEditor,
   Block,
@@ -10,7 +10,6 @@ import { BlockNoteView, useBlockNote } from "@blocknote/react";
 import "@blocknote/core/style.css";
 import useTheme from "@/context/theme";
 
-// Our <Editor> component we can reuse later
 export default function Editor({
   isEditable,
   content,
@@ -18,9 +17,8 @@ export default function Editor({
   isEditable: boolean;
   content: any;
 }) {
+  const { themeMode } = useTheme();
 
-    const { themeMode} = useTheme();
-  // Creates a new editor instance.
   const editor: BlockNoteEditor | null = useBlockNote({
     onEditorContentChange: (e) => {
       localStorage.setItem("editor", JSON.stringify(e.topLevelBlocks));
@@ -29,6 +27,11 @@ export default function Editor({
     editable: isEditable,
   });
 
-  // Renders the editor instance using a React component.
-  return <BlockNoteView editor={editor} theme={themeMode==="dark"?"dark":"light"}/>;
+  return (
+    <BlockNoteView
+      className="w-full"
+      editor={editor}
+      theme={themeMode === "dark" ? "dark" : "light"}
+    />
+  );
 }
