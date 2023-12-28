@@ -1,20 +1,37 @@
 "use client";
 
 import useTheme from "@/context/theme";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Navbar = () => {
   const { themeMode, darkTheme, lightTheme } = useTheme();
+  const [isChecked, setChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    if (themeMode == "dark") {
+      setChecked(false);
+    } else if (themeMode == "light") {
+      setChecked(true);
+    } else {
+      setChecked(true);
+    }
+  };
+
   const toggleTheme = (e: any) => {
     const themeStatus = e.currentTarget?.checked;
     if (themeStatus) {
-      console.log("light");
+      setChecked(true);
       lightTheme();
     } else {
-      console.log("dark");
+      setChecked(false);
       darkTheme();
     }
   };
+
+  useEffect(() => {
+    handleCheckboxChange();
+  }, []);
+  
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -33,8 +50,8 @@ const Navbar = () => {
           <input
             type="checkbox"
             className="theme-controller"
-            value="synthwave"
-            checked={themeMode === "light"}
+            value={themeMode}
+            checked={isChecked}
             onChange={toggleTheme}
           />
 
