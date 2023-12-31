@@ -14,7 +14,8 @@ export const options = {
                 }
                 return {
                     ...profile,
-                    role: userRole
+                    role: userRole,
+                    image:profile.avatar_url
                 }
             },
             clientId: process.env.GITHUB_ID,
@@ -24,7 +25,7 @@ export const options = {
             profile(profile) {
                 console.log("Profile Google: ", profile)
 
-
+                let userRole = "Google User"
                 return {
                     ...profile,
                     id: profile.sub,
