@@ -5,38 +5,8 @@ import Credentials from "next-auth/providers/credentials"
 
 export const options = {
     providers: [
-        Github({
-            profile(profile) {
-                console.log("Profile Github: ", profile)
-
-                let userRole = "Github User"
-                if (profile?.email == "codesorcerers@gmail.com") {
-                    userRole = "admin"
-                }
-                return {
-                    ...profile,
-                    role: userRole,
-                    image: profile.avatar_url
-                }
-            },
-            clientId: process.env.GITHUB_ID,
-            clientSecret: process.env.GITHUB_SECRET
-        }),
-        Google({
-            profile(profile) {
-                console.log("Profile Google: ", profile)
-
-                let userRole = "Google User"
-                return {
-                    ...profile,
-                    id: profile.sub,
-                    role: userRole
-                }
-            },
-            clientId: process.env.GOOGLE_ID,
-            clientSecret: process.env.GOOGLE_SECRET
-        }),
-        CredentialsProvider({
+        
+        Credentials({
             // The name to display on the sign in form (e.g. 'Sign in with...')
             name: 'nextBlog',
             // The credentials is used to generate a suitable form on the sign in page.
@@ -73,7 +43,38 @@ export const options = {
                 // Return null if user data could not be retrieved
                 return null
             }
-        })
+        }),
+        Github({
+            profile(profile) {
+                console.log("Profile Github: ", profile)
+
+                let userRole = "Github User"
+                if (profile?.email == "codesorcerers@gmail.com") {
+                    userRole = "admin"
+                }
+                return {
+                    ...profile,
+                    role: userRole,
+                    image: profile.avatar_url
+                }
+            },
+            clientId: process.env.GITHUB_ID,
+            clientSecret: process.env.GITHUB_SECRET
+        }),
+        Google({
+            profile(profile) {
+                console.log("Profile Google: ", profile)
+
+                let userRole = "Google User"
+                return {
+                    ...profile,
+                    id: profile.sub,
+                    role: userRole
+                }
+            },
+            clientId: process.env.GOOGLE_ID,
+            clientSecret: process.env.GOOGLE_SECRET
+        }),
     ],
     callbacks: {
         async jwt({ token, user }) {

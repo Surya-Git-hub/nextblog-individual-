@@ -11,11 +11,14 @@
   "dependencies": {
     "@blocknote/core": "^0.10.1",
     "@blocknote/react": "^0.10.1",
+    "@hookform/resolvers": "^3.3.3",
     "mongoose": "^8.0.3",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.49.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
