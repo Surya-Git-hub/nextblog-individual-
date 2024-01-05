@@ -4,6 +4,11 @@ import Credentials from "next-auth/providers/credentials"
 
 
 export const options = {
+    
+        pages: {
+            signIn: "/(auth)/register",
+          },
+    
     providers: [
         
         Credentials({
