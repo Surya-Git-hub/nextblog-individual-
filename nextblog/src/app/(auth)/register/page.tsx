@@ -1,6 +1,20 @@
+"use client"
 import React from "react";
+import { signIn } from "next-auth/react";
 
 const page = () => {
+  const googleSignIn = async () => {
+    const result = await signIn("google", {
+      callbackUrl: "/",
+    });
+    console.log({ result });
+  };
+  const githubSignIn = async () => {
+    const result = await signIn("github", {
+      callbackUrl: "/",
+    });
+    console.log({ result });
+  };
   return (
     <div>
       <div className="relative flex flex-col items-center justify-center h-screen overflow-hidden">
@@ -46,8 +60,8 @@ const page = () => {
               <button className="btn btn-block">Login</button>
             </div>
             <div className="flex justify-around ">
-            <button className="btn  glass ">Login with Google</button>
-            <button className="btn  glass">Login with Github</button>
+            <button className="btn  glass " onClick={googleSignIn}>Login with Google</button>
+            <button className="btn  glass" onClick={githubSignIn}>Login with Github</button>
             </div>
 
           </form>
