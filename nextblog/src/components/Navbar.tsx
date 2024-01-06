@@ -12,14 +12,14 @@ const Navbar = () => {
   // (async () => {
   //   session = await getServerSession(options);
   // })();
-const {data:session}=useSession({
-  required:false,
-  onUnauthenticated(){
-    console.log("unauthenticated")
-  }
-});
+  const { data: session } = useSession({
+    required: false,
+    onUnauthenticated() {
+      console.log("unauthenticated");
+    },
+  });
 
-console.log("session",session)
+  console.log("session", session);
   const { themeMode, darkTheme, lightTheme } = useTheme();
   const [isChecked, setChecked] = useState(false);
 
@@ -51,7 +51,11 @@ console.log("session",session)
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Next Blog</a>
+        {/* <a className="btn btn-ghost text-xl"> */}
+          <Link className="btn btn-ghost text-xl" href={"/"}>
+            Next Blog
+          </Link>
+        {/* </a> */}
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
@@ -103,7 +107,11 @@ console.log("session",session)
             <div className="w-10 rounded-full">
               <img
                 alt="Tailwind CSS Navbar component"
-                src={session?(session?.user?.image):("https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg")}
+                src={
+                  session
+                    ? session?.user?.image
+                    : "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                }
               />
             </div>
           </div>

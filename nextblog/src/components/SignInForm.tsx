@@ -5,15 +5,13 @@ import { signIn } from "next-auth/react";
 
 const SigninForm = () => {
   const googleSignIn = async () => {
-    const result = await signIn("google", {
-      callbackUrl: "/",
-    });
+    const result = await signIn("google");
     console.log({ result });
   };
   const githubSignIn = async () => {
-    const result = await signIn("github", {
-      callbackUrl: "/",
-    });
+    const result = await signIn("github"
+    ,{callbackUrl:"/api/auth/callback/github" }
+    );
     console.log({ result });
   };
   return (
