@@ -85,6 +85,9 @@ export const options:AuthOptions = {
 
     callbacks: {
         async jwt({ token, user }: { token: JWT; user: User | AdapterUser }) {
+            console.log("token",token)
+            console.log("user",user)
+
             if ('role' in user) {
                 token.role = (user as AdapterUser).role;
             }

@@ -2,8 +2,9 @@
 
 import useTheme from "@/context/theme";
 import React, { useEffect, useState } from "react";
-import { getServerSession } from "next-auth";
-import { options } from "@/app/api/auth/[...nextauth]/options";
+import { signIn } from "next-auth/react";
+// import { getServerSession } from "next-auth";
+// import { options } from "@/app/api/auth/[...nextauth]/options";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
@@ -12,13 +13,13 @@ const Navbar = () => {
   // (async () => {
   //   session = await getServerSession(options);
   // })();
-  const { data: session } = useSession({
-    required: false,
+  const { data: session, status } = useSession({
+    required: true,
     onUnauthenticated() {
       console.log("unauthenticated");
     },
   });
-
+  console.log("status", status);
   console.log("session", session);
   const { themeMode, darkTheme, lightTheme } = useTheme();
   const [isChecked, setChecked] = useState(false);
@@ -52,9 +53,9 @@ const Navbar = () => {
     <div className="navbar bg-base-100">
       <div className="flex-1">
         {/* <a className="btn btn-ghost text-xl"> */}
-          <Link className="btn btn-ghost text-xl" href={"/"}>
-            Next Blog
-          </Link>
+        <Link className="btn btn-ghost text-xl" href={"/"}>
+          Next Blog
+        </Link>
         {/* </a> */}
       </div>
       <div className="flex-none gap-2">
@@ -98,6 +99,9 @@ const Navbar = () => {
         ) : (
           <Link href={"/api/auth/signin"}>Login</Link>
         )}
+        <button className="btn  glass" onClick={()=>{signIn('github')}}>
+                Login with Github
+              </button>
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
@@ -109,7 +113,7 @@ const Navbar = () => {
                 alt="Tailwind CSS Navbar component"
                 src={
                   session
-                    ? session?.user?.image
+                    ? (session?.user?.image as string)
                     : "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
                 }
               />

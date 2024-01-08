@@ -1,19 +1,22 @@
 "use client";
 
 import React from "react";
-import { signIn } from "next-auth/react";
+import {  signIn } from "next-auth/react";
 
 const SigninForm = () => {
   const googleSignIn = async () => {
-    const result = await signIn("google");
+    const result = await signIn("google", {
+      callbackUrl: "/",
+    });
     console.log({ result });
   };
   const githubSignIn = async () => {
-    const result = await signIn("github"
-    ,{callbackUrl:"/api/auth/callback/github" }
-    );
+    const result = await signIn("github", {
+      callbackUrl: "/",
+    });
     console.log({ result });
   };
+
   return (
     <div>
       <div className="relative flex flex-col items-center justify-center h-screen overflow-hidden">
@@ -56,7 +59,9 @@ const SigninForm = () => {
             <div>
               <button className="btn btn-block">Login</button>
             </div>
-            <div className="flex justify-around ">
+          </form>
+          <hr />
+          <div className="flex justify-around ">
               <button className="btn  glass " onClick={googleSignIn}>
                 Login with Google
               </button>
@@ -64,7 +69,6 @@ const SigninForm = () => {
                 Login with Github
               </button>
             </div>
-          </form>
         </div>
       </div>
     </div>
